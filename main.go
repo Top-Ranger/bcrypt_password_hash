@@ -32,6 +32,7 @@ func main() {
 	computation := flag.String("time", "500ms", "Minimum computation time for the password hash. Based on this, the difficulty will be computed. Must be parseable by go time package")
 	difficulty := flag.Int("difficulty", 0, "If set to non-zero, this difficulty will be used instead of calculating it based on execution time")
 	password := flag.String("password", "", "Password. If empty, it will be read from stdin")
+	usebase64 := flag.Bool("base64", true, "Set whether the result should be encoded with base64 or not")
 
 	flag.Parse()
 
@@ -112,6 +113,9 @@ func main() {
 		}
 	}
 
-	fmt.Printf("Hash: %s\n", base64.StdEncoding.EncodeToString(hash))
-
+	if *usebase64 {
+		fmt.Printf("Hash: %s\n", base64.StdEncoding.EncodeToString(hash))
+	} else {
+		fmt.Printf("Hash: %s\n", string(hash))
+	}
 }
