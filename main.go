@@ -48,6 +48,10 @@ func main() {
 			return
 		}
 
+		if len(pw1) > 72 {
+			fmt.Printf("For compatibilities sake, it is recommended that the password is no longer than 72 bytes. Your password is %d bytes long. Proceed with caution.\n", len(pw1))
+		}
+
 		fmt.Printf("Repeat Password: ")
 		pw2, err := term.ReadPassword(int(os.Stdin.Fd()))
 		fmt.Print("\n")
